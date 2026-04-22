@@ -2,9 +2,10 @@
   "name": "name_classification_api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +17,12 @@
   "homepage": "https://github.com/jimmie-01/name_classification_api#readme",
   "devDependencies": {
     "axios": "^1.15.0",
+    "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.4.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "uuid": "^14.0.0"
   }
 }
