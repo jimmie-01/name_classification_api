@@ -23,7 +23,7 @@ connectDB();
 app.use(cors()); //Allow CORS for all origin
 app.use(bodyParser.json());
 
-app.use(apiRoutes);
+app.use('/api', apiRoutes);
 
 app.listen(PORT, ()=> {
 	console.log(`Server listening for request on port ${PORT}`);
