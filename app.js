@@ -22,6 +22,7 @@ connectDB();
 //Middleware
 app.use(cors()); //Allow CORS for all origin
 app.use(bodyParser.json());
+app.use(express.json());
 
 app.use('/api', apiRoutes);
 

@@ -6,7 +6,7 @@ const getAgeGroup = (age) => {
 }
 
 const getTopCountry = (countries) => {
-	if (!countries || counntries.length === 0) return null;
+	if (!countries || countries.length === 0) return null;
 	return countries.reduce((max, curr) => 
 		curr.probability > max.probability ? curr : max 
 	); 

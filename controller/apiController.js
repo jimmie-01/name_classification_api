@@ -49,6 +49,8 @@ module.exports.post_one = async(req, res) => {
 		//Fetch APIs
 		const { gender, age, nation } = await fetchExternalData(name);
 
+		console.dir(nation, { depth: null });
+
 		//Validate responses
 		validateGenderize(gender);
 		validateAgify(age);
@@ -69,6 +71,7 @@ module.exports.post_one = async(req, res) => {
 			created_at: new Date().toISOString()
 		};
 
+		console.log(profile);
 		const saved = await Profile.create(profile);
 
 		return res.status(201).json({

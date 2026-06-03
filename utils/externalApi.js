@@ -2,13 +2,13 @@ const axios = require('axios');
 
 const fetchExternalData = async (name) => {
 	const [genderRes, ageRes, nationRes] = await Promise.all([
-		axios.get(`http://api.genderize.io?name=${name}`),
-		axios.get(`http://api.agify.io?name=${name}`),
-		axios.get(`http://api.nationalize.io?name=${name}`)
+		axios.get(`https://api.genderize.io?name=${name}`),
+		axios.get(`https://api.agify.io?name=${name}`),
+		axios.get(`https://api.nationalize.io?name=${name}`)
 	]);
 
 	return {
-		gender: genderRes.date,
+		gender: genderRes.data,
 		age: ageRes.data,
 		nation: nationRes.data
 	};
@@ -41,4 +41,9 @@ const validateNationalize = (data) => {
 	}
 }
 
-module.exports = { fetchExternalData, validateGenderize, validateAgify, validateNationalize };
+module.exports = {
+	fetchExternalData, 
+	validateGenderize, 
+	validateAgify, 
+	validateNationalize
+};
