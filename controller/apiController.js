@@ -16,6 +16,7 @@ module.exports.get_all = async(req, res) => {
 	}
 };
 
+// Create profile if it does not exist
 module.exports.post_one = async(req, res) => {
 	try {
 		let { name } = req.body;
@@ -49,7 +50,7 @@ module.exports.post_one = async(req, res) => {
 		//Fetch APIs
 		const { gender, age, nation } = await fetchExternalData(name);
 
-		console.dir(nation, { depth: null });
+		// console.dir(nation, { depth: null });
 
 		//Validate responses
 		validateGenderize(gender);
@@ -71,7 +72,6 @@ module.exports.post_one = async(req, res) => {
 			created_at: new Date().toISOString()
 		};
 
-		console.log(profile);
 		const saved = await Profile.create(profile);
 
 		return res.status(201).json({
@@ -93,8 +93,23 @@ module.exports.post_one = async(req, res) => {
 	}
 };
 
+// Get single profile
 module.exports.get_one = async(req, res) => {
+	const { id } = req.params;
 
+	const profile = await Profile.findOne({ id });
+
+	if (!profile) {
+		return res.status(404).json({
+			status: "error",
+			message: "Profile not found"
+		});
+	}
+
+	return res.status(200).json({
+		status: "success",
+		data: profile
+	});
 };
 
 module.exports.delete_one = async(req, res) => {
