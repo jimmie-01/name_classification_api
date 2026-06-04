@@ -9,11 +9,26 @@ const {
 const { getAgeGroup, getTopCountry } = require('../utils/utils');
 
 module.exports.get_all = async(req, res) => {
-	try {
-		
-	} catch (error) {
-		
-	}
+	const { gender, country_id, age_group } = req.query;
+
+	const filter = {};
+
+	if (gender) filter.gender = 
+	gender.toLowerCase();
+	if (country_id) filter.country_id = 
+	country_id.toLowerCase();
+	if (age_group) filter.age_group = 
+	age_group.toLowerCase();
+
+	const profiles = await Profile.find(filter).select(
+		"id name gender age age_group country_id"
+	);
+
+	res.status(200).json({
+		status: "Success",
+		count: profiles.count,
+		data: profiles
+	});
 };
 
 // Create profile if it does not exist
