@@ -16,7 +16,7 @@ module.exports.get_all = async(req, res) => {
 	if (gender) filter.gender = 
 	gender.toLowerCase();
 	if (country_id) filter.country_id = 
-	country_id.toLowerCase();
+	country_id.toUpperCase();
 	if (age_group) filter.age_group = 
 	age_group.toLowerCase();
 
@@ -26,12 +26,12 @@ module.exports.get_all = async(req, res) => {
 
 	res.status(200).json({
 		status: "Success",
-		count: profiles.count,
+		count: profiles.length,
 		data: profiles
 	});
 };
 
-// Create profile if it does not exist
+// Create profile
 module.exports.post_one = async(req, res) => {
 	try {
 		let { name } = req.body;
@@ -128,5 +128,16 @@ module.exports.get_one = async(req, res) => {
 };
 
 module.exports.delete_one = async(req, res) => {
+	//const { id } = req.params.id;
 
+	const deleted = await Profile.findOneAndDelete({ _id: req.params.id });
+
+	if (!deleted) {
+		return res.status(404).json({
+			status: "Error",
+			message: "Profile not found"
+		});
+	}
+
+	return res.status(204).send()
 };
